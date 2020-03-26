@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import { Form, Button } from 'react-bootstrap';
+
 class Login extends Component {
 
   state = {
@@ -61,45 +63,59 @@ class Login extends Component {
     const {username, email, password} = this.state;
 
     return (
-      <div>
-        <h1>Log In</h1>
+      <div id='form'>
+        <div className='container' id='form-container'>
+          <h3>Log In</h3>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId='formUsername'>
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                placeholder="username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
 
-        <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-         <button placeholder="submit" type="submit">
-            Log In
-          </button>
+            <Form.Group controlId='formEmail'>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                placeholder="email"
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group controlId='formPassword'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                placeholder="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+
+            <Button placeholder="submit" type="submit">Log In</Button>
+            <div>
+              <h5>or</h5>
+            </div>
+            <div>
+              <Link to='/signup' className='btn btn-info'>Sign Up</Link>
+            </div>
+
+          </Form>
           <div>
-            or <Link to='/signup'>sign up</Link>
+            {
+              this.state.errors ? this.handleErrors() : null
+            }
           </div>
-
-         </form>
-         <div>
-           {
-             this.state.errors ? this.handleErrors() : null
-           }
-         </div>
-    </div>
+        </div>
+      </div>
     );
   }
 };

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { Form, Button } from 'react-bootstrap';
+
 class Signup extends Component {
 
   state = {
@@ -62,48 +64,63 @@ class Signup extends Component {
     const {username, email, password, password_confirmation} = this.state;
 
     return (
-      <div>
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password confirmation"
-            type="password"
-            name="password_confirmation"
-            value={password_confirmation}
-            onChange={this.handleChange}
-          />
+      <div id='form'>
+        <div className='container' id='form-container'>
+          <h3>Sign Up</h3>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group controlId='formUsername'>
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                placeholder="username"
+                type="text"
+                name="username"
+                value={username}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
 
-          <button placeholder="submit" type="submit">
-            Sign Up
-          </button>
+            <Form.Group controlId='formEmail'>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                placeholder="email"
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
 
-        </form>
-        <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
+            <Form.Group controlId='formPassword'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                placeholder="password"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group controlId='formPasswordConfirm'>
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                placeholder="password confirmation"
+                type="password"
+                name="password_confirmation"
+                value={password_confirmation}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+
+            <Button placeholder="submit" type="submit">Sign Up</Button>
+          </Form>
+          <div>
+            {
+              this.state.errors ? this.handleErrors() : null
+            }
+          </div>
         </div>
+
       </div>
     );
   };
