@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import Home from './components/Home';
+import Navtool from './components/Navtool';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
@@ -51,6 +52,7 @@ class App extends Component {
     return (
       <div>
       <BrowserRouter>
+        <Navtool />
         <Switch>
 
           <Route exact path='/'
