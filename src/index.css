@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+.card {
+  width: 20rem;
+  font-size: 1.5em;
+}
+
+#card-row {
+  justify-content: space-between;
+}
+
 #navbar {
   background: #00c3ff;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
@@ -26,6 +35,7 @@ code {
   padding: 2px;
   border: 1px solid black;
   border-radius: 5px;
+  font-weight: bold;
 }
 
 #home {
@@ -36,17 +46,30 @@ code {
 
 #home-container {
   padding: 10px;
-  border: 1px solid red;
   text-align: center;
+}
+
+#footer {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  background: #00c3ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ffff1c, #00c3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#intro-cards {
+  justify-content: center;
 }
 
 #jumbo-container {
   background: inherit;
-  border: 1px solid black;
+  margin-bottom: 0;
 }
 
 #jumbo-container p {
   font-size: 1.5em;
+  padding-top: 20px;
 }
 
 #form {
