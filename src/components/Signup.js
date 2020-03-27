@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import { Form, Button } from 'react-bootstrap';
@@ -45,7 +46,8 @@ class Signup extends Component {
   };
 
   redirect = () => {
-    this.props.history.push('/')
+    console.log("history:", this.props)
+    window.location.replace('/')
   };
 
   handleErrors = () => {
@@ -66,7 +68,7 @@ class Signup extends Component {
     return (
       <div id='form'>
         <div className='container' id='form-container'>
-          <h3>Sign Up</h3>
+          <h3 style={{textAlign: 'center'}}>Sign Up</h3>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId='formUsername'>
               <Form.Label>Username</Form.Label>

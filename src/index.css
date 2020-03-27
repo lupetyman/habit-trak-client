@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #00c3ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ffff1c, #00c3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 code {
@@ -13,35 +16,28 @@ code {
 }
 
 .card {
+  font-family: 'Copperplate';
   width: 20rem;
   font-size: 1.5em;
 }
+
+/* .label {
+  text-align: left;
+} */
 
 #card-row {
   justify-content: space-between;
 }
 
 #navbar {
-  background: #00c3ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #ffff1c, #00c3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-#nav {
-
+  background: inherit;
 }
 
 #brand {
   padding: 2px;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 5px;
   font-weight: bold;
-}
-
-#home {
-  background: #00c3ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #ffff1c, #00c3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #home-container {
@@ -49,20 +45,12 @@ code {
   text-align: center;
 }
 
-#footer {
-  text-align: center;
-  padding-top: 40px;
-  padding-bottom: 60px;
-  background: #00c3ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #ffff1c, #00c3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
 #intro-cards {
   justify-content: center;
 }
 
 #jumbo-container {
+  font-family: 'Copperplate';
   background: inherit;
   margin-bottom: 0;
 }
@@ -72,14 +60,8 @@ code {
   padding-top: 20px;
 }
 
-#form {
-  background: #00c3ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffff1c, #00c3ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #ffff1c, #00c3ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
 #form-container {
   padding: 20px;
   width: 50%;
-  text-align: center;
+  /* text-align: center; */
 }

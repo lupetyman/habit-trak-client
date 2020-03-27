@@ -44,7 +44,7 @@ class Login extends Component {
   };
 
   redirect = () => {
-    this.props.history.push('/')
+    window.location.replace('/')
   };
 
   handleErrors = () => {
@@ -65,10 +65,10 @@ class Login extends Component {
     return (
       <div id='form'>
         <div className='container' id='form-container'>
-          <h3>Log In</h3>
+          <h3 style={{textAlign: 'center'}}>Log In</h3>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId='formUsername'>
-              <Form.Label>Username</Form.Label>
+              <Form.Label className='label'>Username</Form.Label>
               <Form.Control
                 placeholder="username"
                 type="text"
@@ -79,7 +79,7 @@ class Login extends Component {
             </Form.Group>
 
             <Form.Group controlId='formEmail'>
-              <Form.Label>Email Address</Form.Label>
+              <Form.Label className='label'>Email Address</Form.Label>
               <Form.Control
                 placeholder="email"
                 type="email"
@@ -90,7 +90,7 @@ class Login extends Component {
             </Form.Group>
 
             <Form.Group controlId='formPassword'>
-              <Form.Label>Password</Form.Label>
+              <Form.Label className='label'>Password</Form.Label>
               <Form.Control
                 placeholder="password"
                 type="password"
@@ -99,14 +99,15 @@ class Login extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
+            <div>
 
-            <Button placeholder="submit" type="submit">Log In</Button>
-            <div>
-              <h5>or</h5>
-            </div>
-            <div>
+              <Button placeholder="submit" type="submit">Log In</Button>{' '}{' '}
+              <strong>or</strong>{' '}{' '}
+
+
               <Link to='/signup' className='btn btn-info'>Sign Up</Link>
             </div>
+
 
           </Form>
           <div>

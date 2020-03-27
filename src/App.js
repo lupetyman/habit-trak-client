@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Navtool from './components/Navtool';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Footer from './components/Footer';
+import HabitsContainer from './containers/HabitsContainer';
 
 
 class App extends Component {
@@ -73,8 +73,9 @@ class App extends Component {
           loggedInStatus={this.state.isLoggedIn}/>}
           />
 
+          <Route exact path='/habits' render={() => <HabitsContainer/>}/>
+
         </Switch>
-        <Footer />
       </BrowserRouter>
       </div>
     );
