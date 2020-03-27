@@ -15,20 +15,30 @@ code {
     monospace;
 }
 
-.card {
-  font-family: 'Copperplate';
-  width: 20rem;
-  font-size: 1.5em;
-}
+/* Card styles */
 
-/* .label {
-  text-align: left;
-} */
+.card-container {
+  padding: 30px;
+}
 
 #card-row {
   justify-content: space-between;
 }
 
+#habit-card {
+  font-size: 1.5rem;
+  font-family: 'Copperplate';
+  text-align: center;
+}
+
+#search-bar {
+  padding: 50px;
+}
+
+/* End Card Styles */
+
+
+/* Home and Nav styles */
 #navbar {
   background: inherit;
 }
@@ -43,6 +53,12 @@ code {
 #home-container {
   padding: 10px;
   text-align: center;
+}
+
+.home-card {
+  font-family: 'Copperplate';
+  width: 20rem;
+  font-size: 1.5em;
 }
 
 #intro-cards {
@@ -63,5 +79,4 @@ code {
 #form-container {
   padding: 20px;
   width: 50%;
-  /* text-align: center; */
 }

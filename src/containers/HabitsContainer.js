@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-// import { Redirect } from 'react-router-dom';
+import { CardColumns, Col, Container, Form, FormControl, Button, Row } from 'react-bootstrap';
 import axios from 'axios';
+
+import HabitCard from '../components/HabitCard';
 
 
 class HabitsContainer extends Component {
@@ -9,28 +11,41 @@ class HabitsContainer extends Component {
     habits: []
   }
 
+  componentDidMount() {
+    this.fetchHabits()
+  };
+
   fetchHabits = () => {
     axios.get('http://localhost:3001/habits')
     .then(response => {
-      console.log(response)
-      // this.setState({
-      //   habits: response
-      // })
+      this.setState({
+        habits: response.data.habits
+      })
     })
   };
 
 
   render() {
+    let habit = (
+      this.state.habits.map(habit => {
+        return <HabitCard key={habit.id} {...habit}/>
+      })
+    );
+
     return (
       <React.Fragment>
         <div className='container'>
-          <div>
-            Search Bar
-          </div>
-          <div>
-            {/* Fetch habits, map and output as cards */}
-            Habit Container
-          </div>
+          <Form inline id='search-bar'>
+            <FormControl type="text" placeholder="Search" className=" mr-lg-2" style={{width: '33%'}}/>
+            <Button type="submit">Submit</Button>
+          </Form>
+          <Container>
+            <Row>
+              <CardColumns id='card-cols'>
+                {habit}
+              </CardColumns>
+            </Row>
+          </Container>
         </div>
       </React.Fragment>
     );

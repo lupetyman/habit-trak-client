@@ -44,7 +44,7 @@ class Login extends Component {
   };
 
   redirect = () => {
-    window.location.replace('/')
+    window.location.replace('/habits')
   };
 
   handleErrors = () => {

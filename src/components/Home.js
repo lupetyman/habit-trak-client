@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Jumbotron, Card, Container, Col, Row } from 'react-bootstrap';
+import { Jumbotron, Card, Container, Row } from 'react-bootstrap';
 
 const Home = () => {
   return (
@@ -16,7 +16,7 @@ const Home = () => {
         <Container id='intro-cards'>
           {/* 3 columns of cards in a row: */}
           <Row id='card-row'>
-            <Card className='card' bg='secondary' text='white'>
+            <Card className='home-card' bg='secondary' text='white'>
               <Card.Header>Step 1</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -26,7 +26,7 @@ const Home = () => {
               </Card.Body>
             </Card>
 
-            <Card className='card' bg='secondary' text='white'>
+            <Card className='home-card' bg='secondary' text='white'>
               <Card.Header>Step 2</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -36,7 +36,7 @@ const Home = () => {
               </Card.Body>
             </Card>
 
-            <Card className='card' bg='secondary' text='white'>
+            <Card className='home-card' bg='secondary' text='white'>
               <Card.Header>Step 3</Card.Header>
               <Card.Body>
                 <Card.Text>
