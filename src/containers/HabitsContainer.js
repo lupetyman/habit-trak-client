@@ -11,6 +11,10 @@ class HabitsContainer extends Component {
     habits: []
   }
 
+  sortHabits = (a, b) => {
+    return a.name - b.name;
+  };
+
   componentDidMount() {
     this.fetchHabits()
   };
@@ -19,7 +23,11 @@ class HabitsContainer extends Component {
     axios.get('http://localhost:3001/habits')
     .then(response => {
       this.setState({
-        habits: response.data.habits
+        habits: response.data.habits.sort(function(a, b) {
+           if(a.name < b.name) {return -1;}
+           if(a.name > b.name) {return 1;}
+           return 0;
+        })
       })
     })
   };
@@ -39,13 +47,13 @@ class HabitsContainer extends Component {
             <FormControl type="text" placeholder="Search" className=" mr-lg-2" style={{width: '33%'}}/>
             <Button type="submit">Submit</Button>
           </Form>
-          <Container>
+
+          <Container id='card-container'>
             <Row>
-              <CardColumns id='card-cols'>
-                {habit}
-              </CardColumns>
+              {habit}
             </Row>
           </Container>
+
         </div>
       </React.Fragment>
     );
