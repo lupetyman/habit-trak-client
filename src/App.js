@@ -15,6 +15,8 @@ class App extends Component {
     isLoggedIn: false,
     user: {},
     habits: [],
+    filteredHabits: [],
+    filterValue: '',
     selectedHabit: null
   };
 
@@ -66,6 +68,19 @@ class App extends Component {
     })
   };
 
+  //Filter Habits
+  setFilter = (newFilterValue) => {
+    this.setState({
+      filterValue: newFilterValue
+    })
+  }
+
+  applyFilter = () => {
+    return this.state.habits.filter(habit => {
+      return habit.name.toLowerCase().includes(this.state.filterValue.toLowerCase())
+    })
+  }
+
   //Select a habit to add to profile
   selectHabit = (habitID) => {
     const foundHabit = this.state.habits.find(habit => habit.id === habitID)
@@ -75,14 +90,10 @@ class App extends Component {
   }
 
   render() {
-    // console.log("render", this.state.user)
-    // if (!this.state.user) {
-    //   return <div>Loading...</div>
-    // }
     return (
       <div>
       <BrowserRouter>
-        <Navtool />
+        <Navtool isLoggedIn={this.state.isLoggedIn} logOut={this.handleLogout} />
         <Switch>
 
           <Route exact path='/'
@@ -104,8 +115,11 @@ class App extends Component {
 
           <Route exact path='/habits'
           render={() => <HabitsContainer
-          habits={this.state.habits}
-          selectHabit={this.selectHabit}/>}/>
+          habits={this.applyFilter()}
+          selectHabit={this.selectHabit}
+          setFilter={this.setFilter}
+          filterValue={this.state.filterValue}/>}
+          />
 
         </Switch>
       </BrowserRouter>

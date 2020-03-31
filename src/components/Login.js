@@ -13,13 +13,14 @@ class Login extends Component {
     errors: ''
   };
 
+  //Get user input
   handleChange = (event) => {
-    const {name, value} = event.target
     this.setState({
-      [name]: value
+      [event.target.name]: event.target.value
     })
   };
 
+  //Send user data to backend
   handleSubmit = (event) => {
     event.preventDefault();
     const {username, email, password} = this.state;
@@ -32,7 +33,7 @@ class Login extends Component {
     axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.logged_in) {
-          this.props.handleLogin(response.data)
+          this.props.handleLogin(response)
           this.redirect()
         } else {
           this.setState({
@@ -44,6 +45,7 @@ class Login extends Component {
   };
 
   redirect = () => {
+    //TODO direct user to profile page
     window.location.replace('/habits')
   };
 

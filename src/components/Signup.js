@@ -13,13 +13,14 @@ class Signup extends Component {
     errors: ''
   };
 
+  //Get user input
   handleChange = (event) => {
-    const { name, value } = event.target;
     this.setState({
-      [name]: value
+      [event.target.name]: event.target.value
     })
   };
 
+  //Send data to backend
   handleSubmit = (event) => {
     event.preventDefault()
     const {username, email, password, password_confirmation} = this.state;
@@ -33,7 +34,7 @@ class Signup extends Component {
     axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
       .then(response => {
         if (response.data.status === 'created') {
-          this.props.handleLogin(response.data)
+          this.props.handleLogin(response)
           this.redirect()
         } else {
           this.setState({
@@ -46,7 +47,7 @@ class Signup extends Component {
 
   redirect = () => {
     console.log("history:", this.props)
-    window.location.replace('/')
+    window.location.replace('/habits')
   };
 
   handleErrors = () => {

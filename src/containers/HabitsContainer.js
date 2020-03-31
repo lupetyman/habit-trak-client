@@ -7,11 +7,13 @@ import HabitCard from '../components/HabitCard';
 class HabitsContainer extends Component {
 
   handleChange = (event) => {
-    let search = event.target.value;
-    console.log(search);
-  }
+    this.props.setFilter(event.target.value)
+  };
 
   render() {
+    console.log(this.props.habits)
+
+    //Map through data, return as Habit Cards
     let habitList = (
       this.props.habits.map(habit => {
         return <HabitCard key={habit.id} {...habit} selectHabit={this.props.selectHabit}/>
@@ -21,12 +23,14 @@ class HabitsContainer extends Component {
     return (
       <React.Fragment>
         <div className='container'>
-          <Form inline id='search-bar'>
+          <h2 style={{textAlign: 'center'}}>Select a habit to get started!</h2>
+          <Form inline id='search-bar' onSubmit={this.handleSubmit}>
             <FormControl
+              className="mr-lg-2"
+              style={{width: '31.5%'}}
               type="text"
               placeholder="Search"
-              className=" mr-lg-2"
-              style={{width: '33%'}}
+              value={this.props.filterValue}
               onChange={this.handleChange}/>
             <Button type="submit">Submit</Button>
           </Form>

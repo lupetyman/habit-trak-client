@@ -16,7 +16,6 @@ code {
 }
 
 /* Card styles */
-
 .card-container {
   padding: 30px;
   /* display: flex;
@@ -41,9 +40,8 @@ code {
 }
 
 #search-bar {
-  padding: 50px;
+  padding: 30px 15px;
 }
-
 /* End Card Styles */
 
 
