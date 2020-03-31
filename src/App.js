@@ -13,12 +13,15 @@ class App extends Component {
 
   state = {
     isLoggedIn: false,
-    user: {}
+    user: {},
+    habits: [],
+    selectedHabit: null
   };
 
-  //Check if user is logged in
+  //Check if user is logged in, fetch habits.
   componentDidMount() {
     this.loginStatus()
+    this.fetchHabits()
   };
 
   //Fetch login status from Rails server.
@@ -35,10 +38,10 @@ class App extends Component {
   };
 
   // Handle user log in and out.
-  handleLogin = (data) => {
+  handleLogin = (response) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user
+      user: response.data.user
     })
   };
 
@@ -49,7 +52,33 @@ class App extends Component {
     })
   };
 
+  //Fetch habits and alphabetize
+  fetchHabits = () => {
+    axios.get('http://localhost:3001/habits')
+    .then(response => {
+      this.setState({
+        habits: response.data.habits.sort(function(a, b) {
+           if(a.name < b.name) {return -1;}
+           if(a.name > b.name) {return 1;}
+           return 0;
+        })
+      })
+    })
+  };
+
+  //Select a habit to add to profile
+  selectHabit = (habitID) => {
+    const foundHabit = this.state.habits.find(habit => habit.id === habitID)
+    this.setState({
+      selectedHabit: foundHabit
+    })
+  }
+
   render() {
+    // console.log("render", this.state.user)
+    // if (!this.state.user) {
+    //   return <div>Loading...</div>
+    // }
     return (
       <div>
       <BrowserRouter>
@@ -73,7 +102,10 @@ class App extends Component {
           loggedInStatus={this.state.isLoggedIn}/>}
           />
 
-          <Route exact path='/habits' render={() => <HabitsContainer/>}/>
+          <Route exact path='/habits'
+          render={() => <HabitsContainer
+          habits={this.state.habits}
+          selectHabit={this.selectHabit}/>}/>
 
         </Switch>
       </BrowserRouter>

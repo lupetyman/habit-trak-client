@@ -8,13 +8,11 @@ const Home = () => {
       <div className="container" id='home-container'>
 
         <Jumbotron className='container' id='jumbo-container'>
-          {/* jumbotron: */}
           <h2>Welcome to HabitTrak!</h2>
           <p>Our goal is to help you achieve <em>your</em> goals, whatever they may be.<br /> And in order to get where you're going,<br /> you need to know what you've done!</p>
         </Jumbotron>
 
         <Container id='intro-cards'>
-          {/* 3 columns of cards in a row: */}
           <Row id='card-row'>
             <Card className='home-card' bg='secondary' text='white'>
               <Card.Header>Step 1</Card.Header>
