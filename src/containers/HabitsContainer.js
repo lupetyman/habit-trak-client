@@ -28,6 +28,7 @@ class HabitsContainer extends Component {
             <FormControl
               className="mr-lg-2"
               style={{width: '31.5%'}}
+              name="filterValue"
               type="text"
               placeholder="Search"
               value={this.props.filterValue}

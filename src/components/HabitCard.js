@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, Col } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
 
 const HabitCard = (props) => {
   return (
@@ -11,8 +11,9 @@ const HabitCard = (props) => {
           <Card.Text>
             {props.name}
           </Card.Text>
-          <Card.Footer onClick={() => props.selectHabit(props.id)}>Category: {props.category}</Card.Footer>
+          <Card.Footer>Category: {props.category}</Card.Footer>
         </Card.Body>
+        <Button onClick={() => props.selectHabit(props.id)}>Add Habit</Button>
       </Card>
       </Col>
   );

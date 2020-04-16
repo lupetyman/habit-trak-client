@@ -7,6 +7,7 @@ import Navtool from './components/Navtool';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import HabitsContainer from './containers/HabitsContainer';
+import UserPage from './components/UserPage';
 
 
 class App extends Component {
@@ -84,12 +85,14 @@ class App extends Component {
   //Select a habit to add to profile
   selectHabit = (habitID) => {
     const foundHabit = this.state.habits.find(habit => habit.id === habitID)
+    console.log("Click", foundHabit)
     this.setState({
       selectedHabit: foundHabit
     })
   }
 
   render() {
+    console.log("Render", this.state)
     return (
       <div>
       <BrowserRouter>
@@ -98,6 +101,13 @@ class App extends Component {
 
           <Route exact path='/'
           render={() => <Home
+          loggedInStatus={this.state.isLoggedIn}/>}
+          />
+
+          <Route exact path='/users/4'
+          render={() => <UserPage
+          handleLogin={this.handleLogin}
+          user={this.state.user}
           loggedInStatus={this.state.isLoggedIn}/>}
           />
 
