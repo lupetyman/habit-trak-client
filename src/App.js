@@ -18,13 +18,14 @@ class App extends Component {
     habits: [],
     filteredHabits: [],
     filterValue: '',
-    selectedHabit: null
+    userHabits: []
   };
 
   //Check if user is logged in, fetch habits.
   componentDidMount() {
     this.loginStatus()
     this.fetchHabits()
+    this.fetchUserHabits()
   };
 
   //Fetch login status from Rails server.
@@ -82,13 +83,39 @@ class App extends Component {
     })
   }
 
-  //Select a habit to add to profile
-  selectHabit = (habitID) => {
-    const foundHabit = this.state.habits.find(habit => habit.id === habitID)
-    console.log("Click", foundHabit)
-    this.setState({
-      selectedHabit: foundHabit
+  //Fetch user habits
+  fetchUserHabits = () => {
+    axios.get('http://localhost:3001/user_habits')
+    .then(response => {
+      console.log(response)
+      this.setState({
+        userHabits: response.data.user_habits
+        })
     })
+  };
+
+  //Select a habit to add to profile
+  selectHabit = (habitObj) => {
+    const foundHabit = this.state.habits.find(habit => habit.id === habitObj.id)
+    // user.habits.push(foundHabit) - Update user object with habit (need serializer)
+    // Update userHabit array:
+    const updatedHabits = [...this.state.userHabits, foundHabit]
+    this.setState({
+      userHabits: updatedHabits
+    })
+  }
+
+  // Join habit and user in backend
+  addUserHabit = (habitObj) => {
+    axios.post('http://localhost:3001/user_habits', {
+      user_id: this.state.user.id,
+      habit_id: habitObj.id
+    })
+      .then(response => {
+        this.selectHabit(response.data.user_habit)
+        console.log("POST", response.data.user_habit)
+        console.log("User habits", this.state.userHabits)
+      })
   }
 
   render() {
@@ -104,11 +131,12 @@ class App extends Component {
           loggedInStatus={this.state.isLoggedIn}/>}
           />
 
-          <Route exact path='/users/4'
+          <Route path='/users/:id'
           render={() => <UserPage
           handleLogin={this.handleLogin}
           user={this.state.user}
-          loggedInStatus={this.state.isLoggedIn}/>}
+          loggedInStatus={this.state.isLoggedIn}
+          userHabits={this.state.userHabits}/>}
           />
 
           <Route exact path='/login'
@@ -126,7 +154,7 @@ class App extends Component {
           <Route exact path='/habits'
           render={() => <HabitsContainer
           habits={this.applyFilter()}
-          selectHabit={this.selectHabit}
+          addUserHabit={this.addUserHabit}
           setFilter={this.setFilter}
           filterValue={this.state.filterValue}/>}
           />

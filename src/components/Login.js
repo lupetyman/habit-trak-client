@@ -46,7 +46,7 @@ class Login extends Component {
 
   redirect = () => {
     //TODO direct user to profile page
-    window.location.replace('/habits')
+    window.location.replace('/users/:id')
   };
 
   handleErrors = () => {
