@@ -87,7 +87,7 @@ class App extends Component {
   fetchUserHabits = () => {
     axios.get('http://localhost:3001/user_habits')
     .then(response => {
-      console.log(response)
+      console.log("Fetch User Habits", response)
       this.setState({
         userHabits: response.data.user_habits
         })
@@ -96,7 +96,7 @@ class App extends Component {
 
   //Select a habit to add to profile
   selectHabit = (habitObj) => {
-    const foundHabit = this.state.habits.find(habit => habit.id === habitObj.id)
+    const foundHabit = this.state.habits.find(habit => habit.id === habitObj.habit_id)
     // user.habits.push(foundHabit) - Update user object with habit (need serializer)
     // Update userHabit array:
     const updatedHabits = [...this.state.userHabits, foundHabit]
@@ -114,12 +114,12 @@ class App extends Component {
       .then(response => {
         this.selectHabit(response.data.user_habit)
         console.log("POST", response.data.user_habit)
-        console.log("User habits", this.state.userHabits)
       })
   }
 
   render() {
     console.log("Render", this.state)
+    console.log("UserHabits render", this.state.userHabits)
     return (
       <div>
       <BrowserRouter>
@@ -136,6 +136,7 @@ class App extends Component {
           handleLogin={this.handleLogin}
           user={this.state.user}
           loggedInStatus={this.state.isLoggedIn}
+          habits={this.state.habits}
           userHabits={this.state.userHabits}/>}
           />
 
