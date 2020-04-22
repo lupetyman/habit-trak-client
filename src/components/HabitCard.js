@@ -12,7 +12,7 @@ const HabitCard = (props) => {
             {props.name}
           </Card.Text>
           <Card.Footer>Category: {props.category}</Card.Footer>
-        <Button onClick={() => props.addUserHabit(props)}>Add Habit</Button>
+        <Button onClick={() => props.addUserHabit(props)} style={{marginTop: '20px'}} size='lg' variant='info'>Add Habit</Button>
       </Card.Body>
       </Card>
       </Col>

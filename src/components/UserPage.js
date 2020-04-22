@@ -1,13 +1,13 @@
 import React from 'react';
 
-import UserHabit from './UserHabit';
+import UserHabitsContainer from '../containers/UserHabitsContainer';
 
 const UserPage = (props) => {
   console.log("UserPage", props)
 
   let validHabit = (
     props.userHabits.map(userHabit => userHabit.user_id === props.user.id ?
-      <UserHabit key={userHabit.id}
+      <UserHabitsContainer key={userHabit.id}
         userHabit={userHabit}
         userHabits={props.userHabits}
         habits={props.habits}/> : null )
@@ -15,11 +15,11 @@ const UserPage = (props) => {
 
   return (
     <div className='user-container'>
-      <div>
-        Hello, {props.user.username}.
+      <div className='user-profile'>
+        <h3>Hello, {props.user.username}.</h3>
+        <h5>Here are your currently tracked habits:</h5>
       </div>
-      <div>
-        Here are your currently tracked habits:
+      <div className='userhabits-container'>
           {validHabit}
       </div>
     </div>
