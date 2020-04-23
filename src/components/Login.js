@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import { Form, Button } from 'react-bootstrap';
@@ -34,7 +34,9 @@ class Login extends Component {
       .then(response => {
         if (response.data.logged_in) {
           this.props.handleLogin(response)
-          this.redirect()
+          console.log("Login", response)
+          // this.redirect()
+          this.props.history.push(`/users/${response.data.user.id}`)
         } else {
           this.setState({
             errors: response.data.errors
@@ -44,10 +46,10 @@ class Login extends Component {
       .catch(error => console.log('API error:', error))
   };
 
-  redirect = () => {
-    //TODO direct user to profile page
-    window.location.replace('/users/:id')
-  };
+  // redirect = () => {
+  //   //TODO direct user to profile page
+  //   window.location.replace(`/users/${response.data.user.id}`)
+  // };
 
   handleErrors = () => {
     return (
@@ -123,4 +125,4 @@ class Login extends Component {
   }
 };
 
-export default Login;
+export default withRouter(Login);

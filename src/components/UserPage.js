@@ -3,8 +3,6 @@ import React from 'react';
 import UserHabitsContainer from '../containers/UserHabitsContainer';
 
 const UserPage = (props) => {
-  console.log("UserPage", props)
-
   let validHabit = (
     props.userHabits.map(userHabit => userHabit.user_id === props.user.id ?
       <UserHabitsContainer key={userHabit.id}

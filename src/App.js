@@ -119,7 +119,6 @@ class App extends Component {
 
   render() {
     console.log("Render", this.state)
-    console.log("UserHabits render", this.state.userHabits)
     return (
       <div>
       <BrowserRouter>
@@ -131,7 +130,7 @@ class App extends Component {
           loggedInStatus={this.state.isLoggedIn}/>}
           />
 
-          <Route path='/users/:id'
+          <Route path={`/users/${this.state.user.id}`}
           render={() => <UserPage
           handleLogin={this.handleLogin}
           user={this.state.user}

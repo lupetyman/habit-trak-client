@@ -16,7 +16,7 @@ const UserHabitCard = (props) => {
       </Card.Body>
       <Button onClick={() => console.log('Clicky')}
         variant='success'
-        style={{color: 'yellow'}}
+        style={{color: 'yellow', fontWeight: 'bold', border: '3px solid yellow'}}
         size='lg'>Activate Habit!</Button>
       </Card>
       </Col>
