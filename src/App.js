@@ -28,6 +28,12 @@ class App extends Component {
     this.fetchUserHabits()
   };
 
+  componentDidUpdate(prevState) {
+    if (this.state.userHabits !== prevState.userHabits) {
+      // this.fetchUserHabits()
+    }
+  }
+
   //Fetch login status from Rails server.
   loginStatus = () => {
     axios.get('http://localhost:3001/logged_in', {withCredentials: true})
@@ -97,7 +103,7 @@ class App extends Component {
   //Select a habit to add to profile
   selectHabit = (habitObj) => {
     const foundHabit = this.state.habits.find(habit => habit.id === habitObj.habit_id)
-    // user.habits.push(foundHabit) - Update user object with habit (need serializer)
+    // user.habits.push(foundHabit) - Update user object with habit (maybe use serializer)
     // Update userHabit array:
     const updatedHabits = [...this.state.userHabits, foundHabit]
     this.setState({
@@ -115,6 +121,24 @@ class App extends Component {
         this.selectHabit(response.data.user_habit)
         console.log("POST", response.data.user_habit)
       })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  // Delete user habit
+  deleteUserHabit = (userHabitObj) => {
+    console.log('delete button', userHabitObj)
+    axios.delete(`http://localhost:3001/user_habits/${userHabitObj.id}`, {
+      params: {id: userHabitObj.id}
+    })
+      .then(response => {
+        console.log("Axios", response)
+        console.log("Axios params", response.config.params)
+      })
+      this.setState({
+        userHabits: this.state.userHabits.filter(userHabit => userHabit.id !== userHabitObj.id)
+      })
   }
 
   render() {
@@ -122,7 +146,10 @@ class App extends Component {
     return (
       <div>
       <BrowserRouter>
-        <Navtool isLoggedIn={this.state.isLoggedIn} logOut={this.handleLogout} />
+        <Navtool
+          isLoggedIn={this.state.isLoggedIn}
+          logOut={this.handleLogout}
+          user={this.state.user}/>
         <Switch>
 
           <Route exact path='/'
@@ -130,26 +157,28 @@ class App extends Component {
           loggedInStatus={this.state.isLoggedIn}/>}
           />
 
-          <Route path={`/users/${this.state.user.id}`}
-          render={() => <UserPage
-          handleLogin={this.handleLogin}
-          user={this.state.user}
-          loggedInStatus={this.state.isLoggedIn}
-          habits={this.state.habits}
-          userHabits={this.state.userHabits}/>}
-          />
-
           <Route exact path='/login'
           render={() => <Login
-          handleLogin={this.handleLogin}
-          loggedInStatus={this.state.isLoggedIn}/>}
+            handleLogin={this.handleLogin}
+            loggedInStatus={this.state.isLoggedIn}/>}
           />
 
           <Route exact path='/signup'
           render={() => <Signup
-          handleLogin={this.handleLogin}
-          loggedInStatus={this.state.isLoggedIn}/>}
+            handleLogin={this.handleLogin}
+            loggedInStatus={this.state.isLoggedIn}/>}
           />
+
+          <Route exact path={`/users/${this.state.user.id}`}
+          render={() => <UserPage
+          user={this.state.user}
+          habits={this.state.habits}
+          handleLogin={this.handleLogin}
+          loggedInStatus={this.state.isLoggedIn}
+          userHabits={this.state.userHabits}
+          deleteUserHabit={this.deleteUserHabit}/>}
+          />
+
 
           <Route exact path='/habits'
           render={() => <HabitsContainer

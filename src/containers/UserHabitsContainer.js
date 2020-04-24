@@ -5,11 +5,15 @@ import { Form, Button } from 'react-bootstrap';
 import UserHabitCard from '../components/UserHabitCard';
 
 const UserHabitsContainer = (props) => {
-  console.log("UserHabit component", props)
-
+console.log("UH Container", props)
   let uniqueHabit = (
     props.habits.map(habit => habit.id === props.userHabit.habit_id ?
-     <UserHabitCard key={habit.id} habit={habit} /> : null )
+     <UserHabitCard
+       key={habit.id}
+       habit={habit}
+       userHabits={props.userHabits}
+       userHabit={props.userHabit}
+       deleteUserHabit={props.deleteUserHabit}/> : null )
   );
 
   return (

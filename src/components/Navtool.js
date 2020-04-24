@@ -18,7 +18,7 @@ class Navtool extends Component {
       stateButton2 = <Link to='/signup' className='nav-item btn'>Signup</Link>
     } else {
       brand = <Link to='/habits' className='navbar-brand' id='brand'>Habits</Link>
-      stateButton1 = <Link to='/users/:id' className='nav-item btn'>Profile</Link>
+      stateButton1 = <Link to={`/users/${this.props.user.id}`} className='nav-item btn'>Profile</Link>
       stateButton2 = <Link to='/' className='nav-item btn' onClick={this.props.logOut}>Sign Out</Link>
     }
 
