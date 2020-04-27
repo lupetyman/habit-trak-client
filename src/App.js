@@ -28,11 +28,6 @@ class App extends Component {
     this.fetchUserHabits()
   };
 
-  componentDidUpdate(prevState) {
-    if (this.state.userHabits !== prevState.userHabits) {
-      // this.fetchUserHabits()
-    }
-  }
 
   //Fetch login status from Rails server.
   loginStatus = () => {
@@ -106,9 +101,11 @@ class App extends Component {
     // user.habits.push(foundHabit) - Update user object with habit (maybe use serializer)
     // Update userHabit array:
     const updatedHabits = [...this.state.userHabits, foundHabit]
+    console.log("Select Habit 1", this.state.userHabits)
     this.setState({
       userHabits: updatedHabits
     })
+    console.log("Select Habit 2", this.state.userHabits)
   }
 
   // Join habit and user in backend
@@ -172,9 +169,8 @@ class App extends Component {
           <Route exact path={`/users/${this.state.user.id}`}
           render={() => <UserPage
           user={this.state.user}
-          habits={this.state.habits}
-          handleLogin={this.handleLogin}
           loggedInStatus={this.state.isLoggedIn}
+          habits={this.state.habits}
           userHabits={this.state.userHabits}
           deleteUserHabit={this.deleteUserHabit}/>}
           />

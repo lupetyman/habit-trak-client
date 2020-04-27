@@ -34,8 +34,6 @@ class Login extends Component {
       .then(response => {
         if (response.data.logged_in) {
           this.props.handleLogin(response)
-          console.log("Login", response)
-          // this.redirect()
           this.props.history.push(`/users/${response.data.user.id}`)
         } else {
           this.setState({
@@ -45,11 +43,6 @@ class Login extends Component {
       })
       .catch(error => console.log('API error:', error))
   };
-
-  // redirect = () => {
-  //   //TODO direct user to profile page
-  //   window.location.replace(`/users/${response.data.user.id}`)
-  // };
 
   handleErrors = () => {
     return (
