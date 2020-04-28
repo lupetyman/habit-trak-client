@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import UserHabitsContainer from '../containers/UserHabitsContainer';
 
@@ -6,12 +6,11 @@ const UserPage = (props) => {
   console.log("User Page", props)
 
   let validHabit = (
-    props.userHabits.map(userHabit => userHabit.user_id === props.user.id ?
+    props.userHabits.map(userHabit =>
       <UserHabitsContainer key={userHabit.id}
         userHabit={userHabit}
         userHabits={props.userHabits}
-        habits={props.habits}
-        deleteUserHabit={props.deleteUserHabit}/> : null )
+        deleteUserHabit={props.deleteUserHabit}/> )
       );
 
   return (

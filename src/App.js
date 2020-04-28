@@ -25,7 +25,7 @@ class App extends Component {
   componentDidMount() {
     this.loginStatus()
     this.fetchHabits()
-    this.fetchUserHabits()
+    // this.fetchUserHabits()
   };
 
 
@@ -84,24 +84,23 @@ class App extends Component {
     })
   }
 
-  //Fetch user habits
-  fetchUserHabits = () => {
-    axios.get('http://localhost:3001/user_habits')
-    .then(response => {
-      console.log("Fetch User Habits", response)
-      this.setState({
-        userHabits: response.data.user_habits
-        })
-    })
-  };
+  // //Fetch user habits
+  // fetchUserHabits = () => {
+  //   axios.get('http://localhost:3001/user_habits')
+  //   .then(response => {
+  //     console.log("Fetch User Habits", response)
+  //     this.setState({
+  //       userHabits: response.data.user_habits
+  //       })
+  //   })
+  // };
 
   //Select a habit to add to profile
   selectHabit = (habitObj) => {
     const foundHabit = this.state.habits.find(habit => habit.id === habitObj.habit_id)
-    // user.habits.push(foundHabit) - Update user object with habit (maybe use serializer)
     // Update userHabit array:
     const updatedHabits = [...this.state.userHabits, foundHabit]
-    console.log("Select Habit 1", this.state.userHabits)
+    console.log("Found Habit", foundHabit)
     this.setState({
       userHabits: updatedHabits
     })

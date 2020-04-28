@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import { Form, Button } from 'react-bootstrap';
-
-import UserHabitCard from '../components/UserHabitCard';
+import { Form, Button, Card, Col } from 'react-bootstrap';
 
 class UserHabitsContainer extends Component {
 
@@ -10,14 +8,6 @@ class UserHabitsContainer extends Component {
     dailyGoal: 0,
     weeklyGoal: 0
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.uniqueHabits !== prevProps.habits) {
-  //     this.setState({
-  //       uniqueHabits: this.props.habits
-  //     })
-  //   }
-  // }
 
   handleChange = (event) => {
     this.setState({
@@ -29,20 +19,29 @@ class UserHabitsContainer extends Component {
     console.log("UH Container state", this.state)
     console.log("UH Container props", this.props)
 
-    let uniqueHabit = (
-      this.props.habits.map(habit => habit.id === this.props.userHabit.habit_id ?
-        <UserHabitCard
-          key={habit.id}
-          habit={habit}
-          userHabits={this.props.userHabits}
-          userHabit={this.props.userHabit}
-          deleteUserHabit={this.props.deleteUserHabit}/> : null )
-        )
-
     return (
       <React.Fragment>
-        <div> <h3>Habit:</h3>
-        {uniqueHabit} </div>
+        <div>
+          <h3>Habit:</h3>
+          <Col md={4}>
+          <Card id='user-habit-card'>
+            <Card.Img variant='top' src={this.props.userHabit.img}/>
+            <Card.Body>
+              <Card.Text>
+                {this.props.userHabit.name}
+              </Card.Text>
+            </Card.Body>
+            <Button onClick={() => console.log("Activation click", this.props.userHabit)}
+            variant='success'
+            style={{color: 'yellow', fontWeight: 'bold', border: '3px solid yellow'}}
+            size='lg'>Activate Habit!</Button>
+            <Button onClick={() => this.props.deleteUserHabit(this.props.userHabit)}
+              variant='danger'
+              style={{color: 'black', fontWeight: 'bold', border: '3px solid yellow'}}
+              size='lg'>Delete Habit</Button>
+          </Card>
+          </Col>
+        </div>
         <div>
           <h3>Goals:</h3>
           <Form className='goal-form' onChange={this.handleChange}>

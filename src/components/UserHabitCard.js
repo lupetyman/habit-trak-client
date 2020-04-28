@@ -7,14 +7,14 @@ const UserHabitCard = (props) => {
   return (
       <Col md={4}>
       <Card id='user-habit-card'>
-        <Card.Img variant='top' src={props.habit.img}/>
+        <Card.Img variant='top' src={props.userHabit.img}/>
         <Card.Body>
           <Card.Text>
-            {props.habit.name}
+            {props.userHabit.name}
           </Card.Text>
           {/* <Card.Footer>Category: {props.habit.category}</Card.Footer> */}
       </Card.Body>
-      <Button onClick={() => console.log("Activation click", props.habit)}
+      <Button onClick={() => console.log("Activation click", props.userHabit)}
         variant='success'
         style={{color: 'yellow', fontWeight: 'bold', border: '3px solid yellow'}}
         size='lg'>Activate Habit!</Button>
