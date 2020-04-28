@@ -25,7 +25,7 @@ class App extends Component {
   componentDidMount() {
     this.loginStatus()
     this.fetchHabits()
-    // this.fetchUserHabits()
+    this.fetchUserHabits()
   };
 
 
@@ -84,43 +84,58 @@ class App extends Component {
     })
   }
 
-  // //Fetch user habits
-  // fetchUserHabits = () => {
-  //   axios.get('http://localhost:3001/user_habits')
-  //   .then(response => {
-  //     console.log("Fetch User Habits", response)
-  //     this.setState({
-  //       userHabits: response.data.user_habits
-  //       })
-  //   })
-  // };
+  //Fetch user habits
+  fetchUserHabits = () => {
+    axios.get('http://localhost:3001/user_habits')
+    .then(response => {
+      console.log("Fetch User Habits", response)
+      // map the data and set state of userHabits that match user.id & user_id
+
+      // let foundUserHabits = response.data.user_habits.filter(userHabit => userHabit.user_id === this.state.user.id)
+      this.setState({
+        userHabits: response.data.user_habits
+        })
+    })
+  };
 
   //Select a habit to add to profile
-  selectHabit = (habitObj) => {
-    const foundHabit = this.state.habits.find(habit => habit.id === habitObj.habit_id)
-    // Update userHabit array:
-    const updatedHabits = [...this.state.userHabits, foundHabit]
-    console.log("Found Habit", foundHabit)
-    this.setState({
-      userHabits: updatedHabits
-    })
-    console.log("Select Habit 2", this.state.userHabits)
-  }
+  // selectHabit = (habitObj) => {
+  //   const foundHabit = this.state.habits.find(habit => habit.id === habitObj.habit_id)
+  //   // Update userHabit array:
+  //   const updatedHabits = [...this.state.userHabits, foundHabit]
+  //   // console.log("Found Habit", foundHabit)
+  //   this.setState({
+  //     userHabits: updatedHabits
+  //   })
+  //   console.log("Select userHabits", this.state.userHabits)
+  // }
 
   // Join habit and user in backend
   addUserHabit = (habitObj) => {
+    console.log("Add", habitObj)
     axios.post('http://localhost:3001/user_habits', {
       user_id: this.state.user.id,
-      habit_id: habitObj.id
+      habit_id: habitObj.id,
+      daily_goal: 0,
+      weekly_goal: 0,
+      name: habitObj.name,
+      img: habitObj.img,
+      category: habitObj.category
     })
-      .then(response => {
-        this.selectHabit(response.data.user_habit)
-        console.log("POST", response.data.user_habit)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    .then(response => {
+      this.setState({
+        userHabits: [...this.state.userHabits, habitObj]
+    })
+  })
   }
+  //   .then(response => {
+  //     this.selectHabit(response.data.user_habit)
+  //     console.log("POST", response.data.user_habit)
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //   })
+
 
   // Delete user habit
   deleteUserHabit = (userHabitObj) => {
@@ -128,10 +143,10 @@ class App extends Component {
     axios.delete(`http://localhost:3001/user_habits/${userHabitObj.id}`, {
       params: {id: userHabitObj.id}
     })
-      .then(response => {
-        console.log("Axios", response)
-        console.log("Axios params", response.config.params)
-      })
+      // .then(response => {
+      //   console.log("Axios", response)
+      //   console.log("Axios params", response.config.params)
+      // })
       this.setState({
         userHabits: this.state.userHabits.filter(userHabit => userHabit.id !== userHabitObj.id)
       })

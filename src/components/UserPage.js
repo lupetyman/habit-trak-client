@@ -8,6 +8,7 @@ const UserPage = (props) => {
   let validHabit = (
     props.userHabits.map(userHabit =>
       <UserHabitsContainer key={userHabit.id}
+        user={props.user}
         userHabit={userHabit}
         userHabits={props.userHabits}
         deleteUserHabit={props.deleteUserHabit}/> )
