@@ -11,12 +11,16 @@ class HabitsContainer extends Component {
   };
 
   render() {
-    console.log(this.props.habits)
-
+    console.log("Habits Container", this.props)
     //Map through data, return as Habit Cards
     let habitList = (
       this.props.habits.map(habit => {
-        return <HabitCard key={habit.id} {...habit} addUserHabit={this.props.addUserHabit}/>
+        return <HabitCard
+          key={habit.id}
+          habit={habit}
+          habits={this.props.habits}
+          addUserHabit={this.props.addUserHabit}
+          userHabits={this.props.userHabits}/>
       })
     );
 
