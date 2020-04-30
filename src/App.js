@@ -119,13 +119,15 @@ class App extends Component {
 
   // Delete user habit
   deleteUserHabit = (userHabitObj) => {
-    console.log('delete button', userHabitObj)
-    axios.delete(`http://localhost:3001/user_habits/${userHabitObj.id}`, {
-      params: {id: userHabitObj.id}
-    })
+    let confirmDelete = window.confirm("Delete habit?")
+    if (confirmDelete) {
+      axios.delete(`http://localhost:3001/user_habits/${userHabitObj.id}`, {
+        params: {id: userHabitObj.id}
+      })
       this.setState({
         userHabits: this.state.userHabits.filter(userHabit => userHabit.id !== userHabitObj.id)
       })
+    }
   }
 
   render() {
