@@ -18,15 +18,32 @@ class UserHabitsContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    // axios.post('http://localhost:3001/user_habits', {
-    //   user_id: this.props.user.id,
-    //   habit_id: this.props.userHabit.id
-    // })
+    console.log("Submit", this.props.userHabit)
+    axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
+      ...this.props.userHabit,
+      daily_goal: this.state.daily_goal,
+      weekly_goal: this.state.weekly_goal
+    })
+    .then(response => {
+      this.props.addGoals(response.data.user_habit)
+    })
+    .catch(err => console.log(err))
   }
 
   render() {
-    console.log("UH Container state", this.state)
-    console.log("UH Container props", this.props)
+    let dailyValue;
+    let weeklyValue;
+
+    if (!this.props.userHabit.daily_goal) {
+      dailyValue = this.state.daily_goal
+    } else {
+      dailyValue = this.props.userHabit.daily_goal
+    }
+    if (!this.props.userHabit.weekly_goal) {
+      weeklyValue = this.state.weekly_goal
+    } else {
+      weeklyValue = this.props.userHabit.weekly_goal
+    }
 
     return (
       <React.Fragment>
@@ -55,14 +72,15 @@ class UserHabitsContainer extends Component {
         </div>
         <div>
           <h3>Goals:</h3>
-          <Form className='goal-form' >
+          <p>Current goals:<br /> {this.props.userHabit.daily_goal} times per day.<br /> {this.props.userHabit.weekly_goal} times per week.</p>
+          <Form className='goal-form'>
             <Form.Group controlId="dailyHabitSelect">
               <Form.Label>How many times per day?</Form.Label>
               <Form.Control
                 as="select"
-                style={{width: '68%'}}
+                style={{width: '60%'}}
                 name='daily_goal'
-                value={this.state.daily_goal}
+                value={dailyValue}
                 onChange={this.handleChange}>
                 <option>0</option>
                 <option>1</option>
@@ -78,9 +96,9 @@ class UserHabitsContainer extends Component {
               <Form.Label>How many times per week?</Form.Label>
               <Form.Control
                 as="select"
-                style={{width: '68%'}}
+                style={{width: '60%'}}
                 name='weekly_goal'
-                value={this.state.weekly_goal}
+                value={weeklyValue}
                 onChange={this.handleChange}>
                 <option>0</option>
                 <option>1</option>
@@ -93,7 +111,7 @@ class UserHabitsContainer extends Component {
               </Form.Control>
             </Form.Group>
           </Form>
-          <p>Current goals:<br /> {this.state.daily_goal} times per day.<br /> {this.state.weekly_goal} times per week.</p>
+          <Button placeholder="submit" type="submit" onClick={this.handleSubmit}>Set Goals</Button>
         </div>
         <div>
           <h3>Progress:</h3>

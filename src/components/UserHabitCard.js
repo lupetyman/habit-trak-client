@@ -12,7 +12,6 @@ const UserHabitCard = (props) => {
           <Card.Text>
             {props.userHabit.name}
           </Card.Text>
-          {/* <Card.Footer>Category: {props.habit.category}</Card.Footer> */}
       </Card.Body>
       <Button onClick={() => console.log("Activation click", props.userHabit)}
         variant='success'

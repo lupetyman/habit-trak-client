@@ -130,6 +130,31 @@ class App extends Component {
     }
   }
 
+  // Add goals
+  addGoals = (userHabitObj) => {
+    console.log("starting userHabits", this.state.userHabits)
+    console.log("Passed habit", userHabitObj)
+    // // find correct userHabit in array
+    let foundUserHabit = this.state.userHabits.find(userHabit => userHabit.id === userHabitObj.id)
+    console.log("existing habit", foundUserHabit)
+    // update userHabit object
+    let updatedUserHabit = {...foundUserHabit, ...userHabitObj}
+    console.log("updated habit", updatedUserHabit)
+    // update userHabits array
+    let updatedUserHabits = this.state.userHabits.map(userHabit => {
+      if (userHabit.id === updatedUserHabit.id) {
+        return updatedUserHabit
+      } else {
+        return userHabit
+      }
+    })
+    // set state
+    this.setState({
+      userHabits: updatedUserHabits
+    })
+    console.log("After goal add - UserHabits", this.state.userHabits)
+  }
+
   render() {
     console.log("Render", this.state)
     return (
@@ -139,8 +164,8 @@ class App extends Component {
           isLoggedIn={this.state.isLoggedIn}
           logOut={this.handleLogout}
           user={this.state.user}/>
-        <Switch>
 
+        <Switch>
           <Route exact path='/'
           render={() => <Home
           loggedInStatus={this.state.isLoggedIn}/>}
@@ -164,9 +189,9 @@ class App extends Component {
           loggedInStatus={this.state.isLoggedIn}
           habits={this.state.habits}
           userHabits={this.state.userHabits}
-          deleteUserHabit={this.deleteUserHabit}/>}
+          deleteUserHabit={this.deleteUserHabit}
+          addGoals={this.addGoals}/>}
           />
-
 
           <Route exact path='/habits'
           render={() => <HabitsContainer
@@ -176,7 +201,6 @@ class App extends Component {
           filterValue={this.state.filterValue}
           userHabits={this.state.userHabits}/>}
           />
-
         </Switch>
       </BrowserRouter>
       </div>

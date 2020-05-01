@@ -11,7 +11,8 @@ const UserPage = (props) => {
         user={props.user}
         userHabit={userHabit}
         userHabits={props.userHabits}
-        deleteUserHabit={props.deleteUserHabit}/> )
+        deleteUserHabit={props.deleteUserHabit}
+        addGoals={props.addGoals}/> )
       );
 
   return (

@@ -3,7 +3,6 @@ import React from 'react';
 import { Button, Card, Col } from 'react-bootstrap';
 
 const HabitCard = (props) => {
-  console.log("Habit Card", props)
   let addButton;
   // Does the id of the habit match any of the user's habit_ids?
   let matchedHabit = props.userHabits.find(userHabit => userHabit.habit_id === props.habit.id)
