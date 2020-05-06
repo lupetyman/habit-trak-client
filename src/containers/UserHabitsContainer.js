@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { Form, Button, Card, Col } from 'react-bootstrap';
 
+import ProgressChart from '../components/ProgressChart';
+
 class UserHabitsContainer extends Component {
 
   state = {
@@ -111,11 +113,16 @@ class UserHabitsContainer extends Component {
               </Form.Control>
             </Form.Group>
           </Form>
-          <Button placeholder="submit" type="submit" onClick={this.handleSubmit}>Set Goals</Button>
+          <Button
+            type='submit'
+            variant='info'
+            size='lg'
+            style={{color: 'black', fontWeight: 'bold', marginTop: '30px', width: '60%'}}
+            onClick={this.handleSubmit}>Set Goals</Button>
         </div>
         <div>
           <h3>Progress:</h3>
-          <p>Chart</p>
+          <ProgressChart />
         </div>
       </React.Fragment>
     )
