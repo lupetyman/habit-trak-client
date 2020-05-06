@@ -36,7 +36,7 @@ class HabitsContainer extends Component {
               placeholder="Search"
               value={this.props.filterValue}
               onChange={this.handleChange}/>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Search</Button>
           </Form>
 
           <Container id='card-container'>

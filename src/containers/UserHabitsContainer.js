@@ -8,23 +8,23 @@ import ProgressChart from '../components/ProgressChart';
 class UserHabitsContainer extends Component {
 
   state = {
-    daily_goal: 0,
-    weekly_goal: 0
+    dailyGoal: this.props.userHabit.daily_goal,
+    weeklyGoal: this.props.userHabit.weekly_goal,
+    activationCount: 0
   }
 
   handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: +event.target.value
     })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log("Submit", this.props.userHabit)
     axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
       ...this.props.userHabit,
-      daily_goal: this.state.daily_goal,
-      weekly_goal: this.state.weekly_goal
+      daily_goal: this.state.dailyGoal,
+      weekly_goal: this.state.weeklyGoal
     })
     .then(response => {
       this.props.addGoals(response.data.user_habit)
@@ -32,17 +32,24 @@ class UserHabitsContainer extends Component {
     .catch(err => console.log(err))
   }
 
+  handleActivate = (event) => {
+    this.setState({
+      activationCount: (this.state.activationCount + 1)
+    })
+  }
+
   render() {
+    console.log("Post click", this.state.activationCount)
     let dailyValue;
     let weeklyValue;
 
     if (!this.props.userHabit.daily_goal) {
-      dailyValue = this.state.daily_goal
+      dailyValue = this.state.dailyGoal
     } else {
       dailyValue = this.props.userHabit.daily_goal
     }
     if (!this.props.userHabit.weekly_goal) {
-      weeklyValue = this.state.weekly_goal
+      weeklyValue = this.state.weeklyGoal
     } else {
       weeklyValue = this.props.userHabit.weekly_goal
     }
@@ -60,7 +67,7 @@ class UserHabitsContainer extends Component {
               </Card.Text>
             </Card.Body>
             <Button
-              onClick={() => console.log("Activation click", this.props.userHabit)}
+              onClick={(event) => this.handleActivate(event)}
               variant='success'
               style={{color: 'yellow', fontWeight: 'bold', border: '3px solid yellow'}}
               size='lg'>Activate Habit!</Button>
@@ -74,14 +81,14 @@ class UserHabitsContainer extends Component {
         </div>
         <div>
           <h3>Goals:</h3>
-          <p>Current goals:<br /> {this.props.userHabit.daily_goal} times per day.<br /> {this.props.userHabit.weekly_goal} times per week.</p>
+          <p>Current goals:<br /> {this.state.dailyGoal} times per day.<br /> {this.state.weeklyGoal} times per week.</p>
           <Form className='goal-form'>
             <Form.Group controlId="dailyHabitSelect">
               <Form.Label>How many times per day?</Form.Label>
               <Form.Control
                 as="select"
                 style={{width: '60%'}}
-                name='daily_goal'
+                name='dailyGoal'
                 value={dailyValue}
                 onChange={this.handleChange}>
                 <option>0</option>
@@ -99,7 +106,7 @@ class UserHabitsContainer extends Component {
               <Form.Control
                 as="select"
                 style={{width: '60%'}}
-                name='weekly_goal'
+                name='weeklyGoal'
                 value={weeklyValue}
                 onChange={this.handleChange}>
                 <option>0</option>
@@ -122,7 +129,11 @@ class UserHabitsContainer extends Component {
         </div>
         <div>
           <h3>Progress:</h3>
-          <ProgressChart />
+          <ProgressChart
+            dailyGoal={this.state.dailyGoal}
+            weeklyGoal={this.state.weeklyGoal}
+            activationCount={this.state.activationCount}
+          />
         </div>
       </React.Fragment>
     )

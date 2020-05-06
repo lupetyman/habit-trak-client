@@ -1,17 +1,17 @@
 import React from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 
-const ProgressChart = () => {
+const ProgressChart = (props) => {
   const data = [
-    {goal: 1, activations: 1},
-    {goal: 2, activations: 5},
+    {goal: props.dailyGoal, activations: props.activationCount},
+    {goal: props.weeklyGoal, activations: props.activationCount},
   ]
-
+  console.log("Chart", props)
   return (
     <div>
       <VictoryChart
         theme={VictoryTheme.material}
-        domainPadding={100}
+        domainPadding={80}
         animate={{
           duration: 2000,
           onLoad: { duration: 1000 }
@@ -19,7 +19,7 @@ const ProgressChart = () => {
       >
         <VictoryAxis
           tickValues={[1, 2]}
-          tickFormat={["Daily", "Weekly"]}
+          tickFormat={["Today", "Weekly"]}
         />
         <VictoryAxis
           dependentAxis
