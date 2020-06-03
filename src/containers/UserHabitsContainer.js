@@ -8,9 +8,8 @@ import ProgressChart from '../components/ProgressChart';
 class UserHabitsContainer extends Component {
 
   state = {
-    dailyGoal: this.props.userHabit.daily_goal,
-    weeklyGoal: this.props.userHabit.weekly_goal,
-    activationCount: 0
+    activationCount: this.props.userHabit.activation_count,
+    weeklyGoal: this.props.userHabit.weekly_goal
   }
 
   handleChange = (event) => {
@@ -23,7 +22,6 @@ class UserHabitsContainer extends Component {
     event.preventDefault()
     axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
       ...this.props.userHabit,
-      daily_goal: this.state.dailyGoal,
       weekly_goal: this.state.weeklyGoal
     })
     .then(response => {
@@ -33,25 +31,34 @@ class UserHabitsContainer extends Component {
   }
 
   handleActivate = (event) => {
-    this.setState({
-      activationCount: (this.state.activationCount + 1)
-    })
+    event.preventDefault()
+    // axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
+    //   ...this.props.userHabit,
+    //   daily_goal: this.state.activationCount
+    // })
+    // // .then(response => {
+    // //   this.props.addGoals(response.data.user_habit)
+    // // })
+    // .catch(err => console.log(err))
+    // this.setState({
+    //   activationCount: (this.state.activationCount + 1)
+    // })
   }
 
   render() {
-    console.log("Post click", this.state.activationCount)
-    let dailyValue;
+    let activationCount;
     let weeklyValue;
 
-    if (!this.props.userHabit.daily_goal) {
-      dailyValue = this.state.dailyGoal
-    } else {
-      dailyValue = this.props.userHabit.daily_goal
-    }
     if (!this.props.userHabit.weekly_goal) {
       weeklyValue = this.state.weeklyGoal
     } else {
       weeklyValue = this.props.userHabit.weekly_goal
+    }
+
+    if (!this.props.userHabit.activation_count) {
+      activationCount = this.state.activationCount
+    } else {
+      activationCount = this.props.userHabit.activation_count
     }
 
     return (
@@ -79,30 +86,15 @@ class UserHabitsContainer extends Component {
           </Card>
           </Col>
         </div>
+
         <div>
           <h3>Goals:</h3>
-          <p>Current goals:<br /> {this.state.dailyGoal} times per day.<br /> {this.state.weeklyGoal} times per week.</p>
-          <Form className='goal-form'>
-            <Form.Group controlId="dailyHabitSelect">
-              <Form.Label>How many times per day?</Form.Label>
-              <Form.Control
-                as="select"
-                style={{width: '60%'}}
-                name='dailyGoal'
-                value={dailyValue}
-                onChange={this.handleChange}>
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </Form.Control>
-            </Form.Group>
-          </Form>
-          <Form className='goal-form'>
+          <div style={{marginTop: '60px'}}>
+            <p>Currently:<br /> {this.state.weeklyGoal} times per week.<br /></p>
+          </div>
+          <Form className='goal-form' style={{marginTop: '20px'}}>
             <Form.Group controlId="weeklyHabitSelect">
-              <Form.Label>How many times per week?</Form.Label>
+              <Form.Label>Choose weekly goal:</Form.Label>
               <Form.Control
                 as="select"
                 style={{width: '60%'}}
@@ -117,6 +109,9 @@ class UserHabitsContainer extends Component {
                 <option>5</option>
                 <option>6</option>
                 <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
               </Form.Control>
             </Form.Group>
           </Form>
@@ -124,13 +119,18 @@ class UserHabitsContainer extends Component {
             type='submit'
             variant='info'
             size='lg'
-            style={{color: 'black', fontWeight: 'bold', marginTop: '30px', width: '60%'}}
-            onClick={this.handleSubmit}>Set Goals</Button>
+            style={{color: 'black', fontWeight: 'bold', width: '60%'}}
+            onClick={this.handleSubmit}>Set Goals
+          </Button>
+          <div style={{marginTop: "80px"}}>
+            <p>Number of activations:<br /> {this.state.activationCount} activation(s) this week.</p>
+          </div>
+
         </div>
+
         <div>
           <h3>Progress:</h3>
           <ProgressChart
-            dailyGoal={this.state.dailyGoal}
             weeklyGoal={this.state.weeklyGoal}
             activationCount={this.state.activationCount}
           />

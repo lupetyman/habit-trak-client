@@ -132,14 +132,10 @@ class App extends Component {
 
   // Add goals
   addGoals = (userHabitObj) => {
-    console.log("starting userHabits", this.state.userHabits)
-    console.log("Passed habit", userHabitObj)
     // // find correct userHabit in array
     let foundUserHabit = this.state.userHabits.find(userHabit => userHabit.id === userHabitObj.id)
-    console.log("existing habit", foundUserHabit)
     // update userHabit object
     let updatedUserHabit = {...foundUserHabit, ...userHabitObj}
-    console.log("updated habit", updatedUserHabit)
     // update userHabits array
     let updatedUserHabits = this.state.userHabits.map(userHabit => {
       if (userHabit.id === updatedUserHabit.id) {
