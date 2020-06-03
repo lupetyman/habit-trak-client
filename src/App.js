@@ -131,7 +131,7 @@ class App extends Component {
   }
 
   // Add goals
-  addGoals = (userHabitObj) => {
+  updateUserHabits = (userHabitObj) => {
     // // find correct userHabit in array
     let foundUserHabit = this.state.userHabits.find(userHabit => userHabit.id === userHabitObj.id)
     // update userHabit object
@@ -148,7 +148,7 @@ class App extends Component {
     this.setState({
       userHabits: updatedUserHabits
     })
-    console.log("After goal add - UserHabits", this.state.userHabits)
+    console.log("After update - UserHabits", this.state.userHabits)
   }
 
   render() {
@@ -186,7 +186,7 @@ class App extends Component {
           habits={this.state.habits}
           userHabits={this.state.userHabits}
           deleteUserHabit={this.deleteUserHabit}
-          addGoals={this.addGoals}/>}
+          updateUserHabits={this.updateUserHabits}/>}
           />
 
           <Route exact path='/habits'

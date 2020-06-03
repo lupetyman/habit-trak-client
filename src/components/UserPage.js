@@ -12,7 +12,7 @@ const UserPage = (props) => {
         userHabit={userHabit}
         userHabits={props.userHabits}
         deleteUserHabit={props.deleteUserHabit}
-        addGoals={props.addGoals}/> )
+        updateUserHabits={props.updateUserHabits}/> )
       );
 
   return (

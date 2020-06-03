@@ -25,28 +25,28 @@ class UserHabitsContainer extends Component {
       weekly_goal: this.state.weeklyGoal
     })
     .then(response => {
-      this.props.addGoals(response.data.user_habit)
+      this.props.updateUserHabits(response.data.user_habit)
     })
     .catch(err => console.log(err))
   }
 
   handleActivate = (event) => {
     event.preventDefault()
-    // axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
-    //   ...this.props.userHabit,
-    //   daily_goal: this.state.activationCount
-    // })
-    // // .then(response => {
-    // //   this.props.addGoals(response.data.user_habit)
-    // // })
-    // .catch(err => console.log(err))
-    // this.setState({
-    //   activationCount: (this.state.activationCount + 1)
-    // })
+    this.setState({
+      activationCount: this.state.activationCount++
+    })
+    axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
+      ...this.props.userHabit,
+      activation_count: this.state.activationCount
+    })
+    .then(response => {
+      this.props.updateUserHabits(response.data.user_habit)
+    })
+    .catch(err => console.log(err))
   }
 
   render() {
-    let activationCount;
+    let activationValue;
     let weeklyValue;
 
     if (!this.props.userHabit.weekly_goal) {
@@ -56,9 +56,9 @@ class UserHabitsContainer extends Component {
     }
 
     if (!this.props.userHabit.activation_count) {
-      activationCount = this.state.activationCount
+      activationValue = this.state.activationCount
     } else {
-      activationCount = this.props.userHabit.activation_count
+      activationValue = this.props.userHabit.activation_count
     }
 
     return (
@@ -74,7 +74,7 @@ class UserHabitsContainer extends Component {
               </Card.Text>
             </Card.Body>
             <Button
-              onClick={(event) => this.handleActivate(event)}
+              onClick={this.handleActivate}
               variant='success'
               style={{color: 'yellow', fontWeight: 'bold', border: '3px solid yellow'}}
               size='lg'>Activate Habit!</Button>
@@ -120,10 +120,10 @@ class UserHabitsContainer extends Component {
             variant='info'
             size='lg'
             style={{color: 'black', fontWeight: 'bold', width: '60%'}}
-            onClick={this.handleSubmit}>Set Goals
+            onClick={this.handleSubmit}>Set Goal
           </Button>
           <div style={{marginTop: "80px"}}>
-            <p>Number of activations:<br /> {this.state.activationCount} activation(s) this week.</p>
+            <p>Number of activations:<br /> {activationValue} activation(s) this week.</p>
           </div>
 
         </div>
