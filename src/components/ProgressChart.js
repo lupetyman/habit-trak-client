@@ -2,37 +2,37 @@ import React from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 
 const ProgressChart = (props) => {
-  
+
   const data = [
-    {x: `${props.weeklyGoal}`, y: `${props.activationCount}`}
+    {x: `${props.activationCount}`, y: `${props.weeklyGoal}`}
   ]
 
   return (
     <div>
       <VictoryChart
         // theme={VictoryTheme.material}
-        domainPadding={80}
+        domainPadding={40}
         animate={{
           duration: 2000,
           onLoad: { duration: 1000 }
 }}
       >
+        <VictoryBar
+          style={{
+            data: {fill: 'tomato', width: 65}
+          }}
+          // data={data}
+        />
 
         <VictoryAxis
-          tickValues={[1]}
-          tickFormat={["Activations"]}
+          label={"ACTIVATIONS"}
         />
         <VictoryAxis
           dependentAxis
-          tickFormat={["Goal"]}
+          tickValues={[2, 4, 6, 8, 10]}
+          label={"GOAL!"}
         />
 
-        <VictoryBar
-          style={{
-            data: {fill: 'green'}
-          }}
-          data={data}
-        />
       </VictoryChart>
     </div>
   )

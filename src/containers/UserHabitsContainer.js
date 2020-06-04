@@ -131,8 +131,8 @@ class UserHabitsContainer extends Component {
         <div>
           <h3>Progress:</h3>
           <ProgressChart
-            weeklyGoal={this.state.weeklyGoal}
             activationCount={this.state.activationCount}
+            weeklyGoal={this.state.weeklyGoal}
           />
         </div>
       </React.Fragment>
