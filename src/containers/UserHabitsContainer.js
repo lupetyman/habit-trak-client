@@ -31,7 +31,6 @@ class UserHabitsContainer extends Component {
   }
 
   handleActivate = (event) => {
-    event.preventDefault()
     this.setState({
       activationCount: this.state.activationCount++
     })
@@ -44,15 +43,6 @@ class UserHabitsContainer extends Component {
     })
     .catch(err => console.log(err))
   }
-
-  // checkActivation = () => {
-  //   if (!this.props.userHabit.activactionCount) {
-  //     this.setState({
-  //       activationCount: 0
-  //     })
-  //     return this.state.activationCount
-  //   }
-  // }
 
   render() {
     let activationValue;
@@ -96,7 +86,7 @@ class UserHabitsContainer extends Component {
           </Col>
         </div>
 
-        <div>
+        <div style={{marginLeft: '80px'}}>
           <h3>Goals:</h3>
           <div style={{marginTop: '60px'}}>
             <p>Currently:<br /> {this.state.weeklyGoal} times per week.<br /></p>
@@ -131,14 +121,14 @@ class UserHabitsContainer extends Component {
             style={{color: 'black', fontWeight: 'bold', width: '60%'}}
             onClick={this.handleSubmit}>Set Goal
           </Button>
-          <div style={{marginTop: "80px"}}>
+          <div style={{marginTop: '80px'}}>
             <p>Number of activations:<br /> {activationValue} activation(s) this week.</p>
           </div>
 
         </div>
 
         <div>
-          <h3>Progress:</h3>
+          <h3 style={{marginLeft: '80px'}}>Progress:</h3>
           <ProgressChart
             activationCount={this.state.activationCount}
             weeklyGoal={this.state.weeklyGoal}

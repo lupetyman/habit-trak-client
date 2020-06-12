@@ -2,11 +2,32 @@ import React from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
 const ProgressChart = (props) => {
-  console.log("Chart", props)
 
+  let goal = props.activationCount
+
+  if (goal === null) {
+    goal = 0;
+  } else {
+    goal = props.activationCount;
+  }
+
+  let percent = props.weeklyGoal;
+
+  if (isNaN(props.weeklyGoal)) {
+    percent = 0;
+  } else {
+    percent = props.weeklyGoal;
+  }
+
+  let goalPercent = Math.floor((goal / percent) * 100);
+
+
+
+console.log("Chart", percent)
   return (
     <div>
-      <p style={{fontWeight: 'bold', textAlign: 'center'}}>{Math.floor((props.activationCount / props.weeklyGoal) * 100)}% to Goal!</p>
+      <p style={{fontWeight: 'bold', textAlign: 'center'}}>
+        {goalPercent ? goalPercent : '0'}% to Goal!</p>
       <ProgressBar
         animated
         max={props.weeklyGoal}
