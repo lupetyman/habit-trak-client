@@ -45,6 +45,15 @@ class UserHabitsContainer extends Component {
     .catch(err => console.log(err))
   }
 
+  // checkActivation = () => {
+  //   if (!this.props.userHabit.activactionCount) {
+  //     this.setState({
+  //       activationCount: 0
+  //     })
+  //     return this.state.activationCount
+  //   }
+  // }
+
   render() {
     let activationValue;
     let weeklyValue;

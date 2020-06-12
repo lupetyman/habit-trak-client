@@ -1,39 +1,23 @@
 import React from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import { ProgressBar } from 'react-bootstrap';
 
 const ProgressChart = (props) => {
-
-  const data = [
-    {x: `${props.activationCount}`, y: `${props.weeklyGoal}`}
-  ]
+  console.log("Chart", props)
 
   return (
     <div>
-      <VictoryChart
-        // theme={VictoryTheme.material}
-        domainPadding={40}
-        animate={{
-          duration: 2000,
-          onLoad: { duration: 1000 }
-}}
-      >
-        <VictoryBar
-          style={{
-            data: {fill: 'tomato', width: 65}
-          }}
-          // data={data}
-        />
-
-        <VictoryAxis
-          label={"ACTIVATIONS"}
-        />
-        <VictoryAxis
-          dependentAxis
-          tickValues={[2, 4, 6, 8, 10]}
-          label={"GOAL!"}
-        />
-
-      </VictoryChart>
+      <p style={{fontWeight: 'bold', textAlign: 'center'}}>{Math.floor((props.activationCount / props.weeklyGoal) * 100)}% to Goal!</p>
+      <ProgressBar
+        animated
+        max={props.weeklyGoal}
+        now={props.activationCount}
+        style={{
+          height: '180px',
+          marginTop: '140px',
+          border: '3px solid black',
+          transform: 'rotate(270deg)',
+          borderRadius: '10px',
+          backgroundColor: 'grey'}}/>
     </div>
   )
 }
