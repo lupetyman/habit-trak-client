@@ -31,9 +31,9 @@ class UserHabitsContainer extends Component {
   }
 
   handleActivate = () => {
-    this.setState((state, props) => ({
+    this.setState({
       activationCount: ++this.state.activationCount
-    }))
+    })
     axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
       ...this.props.userHabit,
       activation_count: this.state.activationCount
@@ -45,20 +45,6 @@ class UserHabitsContainer extends Component {
   }
 
   render() {
-    // let activationValue;
-    // let weeklyValue;
-    //
-    // if (!this.props.userHabit.weekly_goal) {
-    //   weeklyValue = 0
-    // } else {
-    //   weeklyValue = this.props.userHabit.weekly_goal
-    // }
-    //
-    // if (!this.props.userHabit.activation_count) {
-    //   activationValue = 0
-    // } else {
-    //   activationValue = this.props.userHabit.activation_count
-    // }
 
     return (
       <React.Fragment>
