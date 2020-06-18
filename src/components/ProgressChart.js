@@ -21,9 +21,6 @@ const ProgressChart = (props) => {
 
   let goalPercent = Math.floor((goal / percent) * 100);
 
-
-
-console.log("Chart", percent)
   return (
     <div>
       <p style={{fontWeight: 'bold', textAlign: 'center'}}>

@@ -28,6 +28,11 @@ class App extends Component {
     this.fetchUserHabits()
   };
 
+  // componentDidUpdate(prevState) {
+  //   if (this.state.userHabits !== prevState.userHabits) {
+  //     this.fetchUserHabits()
+  //   }
+  // }
 
   //Fetch login status from Rails server.
   loginStatus = () => {
@@ -91,9 +96,9 @@ class App extends Component {
     .then(response => {
       // filter habits specific to logged in user
       const foundUserHabits = response.data.user_habits.filter(userHabit => userHabit.user_id === this.state.user.id)
-      this.setState({
+      this.setState((state, props) => ({
         userHabits: foundUserHabits
-        })
+      }))
     })
     .catch(err => console.log(err))
   };
@@ -104,7 +109,7 @@ class App extends Component {
     axios.post('http://localhost:3001/user_habits', {
       user_id: this.state.user.id,
       habit_id: habitObj.id,
-      daily_goal: 0,
+      activation_count: 0,
       weekly_goal: 0,
       name: habitObj.name,
       img: habitObj.img,
@@ -148,11 +153,9 @@ class App extends Component {
     this.setState({
       userHabits: updatedUserHabits
     })
-    console.log("After update - UserHabits", this.state.userHabits)
   }
 
   render() {
-    console.log("Render", this.state)
     return (
       <div>
       <BrowserRouter>

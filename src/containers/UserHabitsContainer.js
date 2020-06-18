@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import { Form, Button, Card, Col } from 'react-bootstrap';
 
 import ProgressChart from '../components/ProgressChart';
+
 
 class UserHabitsContainer extends Component {
 
@@ -14,7 +14,7 @@ class UserHabitsContainer extends Component {
 
   handleChange = (event) => {
     this.setState({
-      [event.target.name]: +event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -30,10 +30,10 @@ class UserHabitsContainer extends Component {
     .catch(err => console.log(err))
   }
 
-  handleActivate = (event) => {
-    this.setState({
-      activationCount: this.state.activationCount++
-    })
+  handleActivate = () => {
+    this.setState((state, props) => ({
+      activationCount: ++this.state.activationCount
+    }))
     axios.put(`http://localhost:3001/user_habits/${this.props.userHabit.id}`, {
       ...this.props.userHabit,
       activation_count: this.state.activationCount
@@ -45,20 +45,20 @@ class UserHabitsContainer extends Component {
   }
 
   render() {
-    let activationValue;
-    let weeklyValue;
-
-    if (!this.props.userHabit.weekly_goal) {
-      weeklyValue = this.state.weeklyGoal
-    } else {
-      weeklyValue = this.props.userHabit.weekly_goal
-    }
-
-    if (!this.props.userHabit.activation_count) {
-      activationValue = this.state.activationCount
-    } else {
-      activationValue = this.props.userHabit.activation_count
-    }
+    // let activationValue;
+    // let weeklyValue;
+    //
+    // if (!this.props.userHabit.weekly_goal) {
+    //   weeklyValue = 0
+    // } else {
+    //   weeklyValue = this.props.userHabit.weekly_goal
+    // }
+    //
+    // if (!this.props.userHabit.activation_count) {
+    //   activationValue = 0
+    // } else {
+    //   activationValue = this.props.userHabit.activation_count
+    // }
 
     return (
       <React.Fragment>
@@ -98,7 +98,7 @@ class UserHabitsContainer extends Component {
                 as="select"
                 style={{width: '60%'}}
                 name='weeklyGoal'
-                value={weeklyValue}
+                value={this.state.weeklyGoal}
                 onChange={this.handleChange}>
                 <option>0</option>
                 <option>1</option>
@@ -122,7 +122,7 @@ class UserHabitsContainer extends Component {
             onClick={this.handleSubmit}>Set Goal
           </Button>
           <div style={{marginTop: '80px'}}>
-            <p>Number of activations:<br /> {activationValue} activation(s) this week.</p>
+            <p>Number of activations:<br /> {this.state.activationCount} activation(s) this week.</p>
           </div>
 
         </div>
