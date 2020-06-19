@@ -18,7 +18,8 @@ class App extends Component {
     habits: [],
     filteredHabits: [],
     filterValue: '',
-    userHabits: []
+    userHabits: [],
+    category: ''
   };
 
   //Check if user is logged in, fetch habits.
@@ -28,11 +29,6 @@ class App extends Component {
     this.fetchUserHabits()
   };
 
-  // componentDidUpdate(prevState) {
-  //   if (this.state.userHabits !== prevState.userHabits) {
-  //     this.fetchUserHabits()
-  //   }
-  // }
 
   //Fetch login status from Rails server.
   loginStatus = () => {
@@ -88,6 +84,25 @@ class App extends Component {
     return this.state.habits.filter(habit => {
       return habit.name.toLowerCase().includes(this.state.filterValue.toLowerCase())
     })
+  }
+
+  filterCategory = (newCategory) => {
+    this.setState({
+      category: newCategory
+    })
+    console.log("Filter category", this.state.habits)
+    if (this.state.category === 'All') {
+      this.setState({
+        habits: this.state.habits
+      })
+    } else {
+      const habitsByCategories = this.state.habits.filter(habit => {
+        return habit.category === newCategory
+      })
+      this.setState({
+        habits: habitsByCategories
+      })
+    }
   }
 
   //Fetch user habits
@@ -197,6 +212,7 @@ class App extends Component {
           habits={this.applyFilter()}
           addUserHabit={this.addUserHabit}
           setFilter={this.setFilter}
+          filterCategory={this.filterCategory}
           filterValue={this.state.filterValue}
           userHabits={this.state.userHabits}/>}
           />

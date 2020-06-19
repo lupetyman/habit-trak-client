@@ -3,22 +3,8 @@ import { ProgressBar } from 'react-bootstrap';
 
 const ProgressChart = (props) => {
 
-  let goal = props.activationCount
-
-  if (goal === null) {
-    goal = 0;
-  } else {
-    goal = props.activationCount;
-  }
-
+  let goal = props.activationCount;
   let percent = props.weeklyGoal;
-
-  if (isNaN(props.weeklyGoal)) {
-    percent = 0;
-  } else {
-    percent = props.weeklyGoal;
-  }
-
   let goalPercent = Math.floor((goal / percent) * 100);
 
   return (

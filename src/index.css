@@ -19,8 +19,15 @@ code {
 
 .card-container {
   padding: 30px;
-  /* display: flex;
-  flex-direction: row; */
+}
+
+.habits-container {
+  padding: 30px;
+}
+
+.category-form {
+  display: inline-block;
+  margin-left: 20px;
 }
 
 #card-row {
@@ -42,11 +49,18 @@ code {
 
 #search-bar {
   padding: 30px 15px;
+  margin-left: 100px;
+  display: inline-block;
 }
 /* End Card Styles */
 
 
 /* Home and Nav styles */
+.home-card {
+  font-family: 'Copperplate';
+  width: 20rem;
+  font-size: 1.5em;
+}
 
 #navbar {
   background: inherit;
@@ -62,12 +76,6 @@ code {
 #home-container {
   padding: 10px;
   text-align: center;
-}
-
-.home-card {
-  font-family: 'Copperplate';
-  width: 20rem;
-  font-size: 1.5em;
 }
 
 #intro-cards {
