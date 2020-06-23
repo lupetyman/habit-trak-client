@@ -4,8 +4,8 @@ import { ProgressBar } from 'react-bootstrap';
 const ProgressChart = (props) => {
 
   let goal = props.activationCount;
-  let percent = props.weeklyGoal;
-  let goalPercent = Math.floor((goal / percent) * 100);
+  let target = props.weeklyGoal;
+  let goalPercent = Math.floor((goal / target) * 100);
 
   return (
     <div>

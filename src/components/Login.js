@@ -97,15 +97,10 @@ class Login extends Component {
               />
             </Form.Group>
             <div>
-
               <Button placeholder="submit" type="submit">Log In</Button>{' '}{' '}
               <strong>or</strong>{' '}{' '}
-
-
               <Link to='/signup' className='btn btn-info'>Sign Up</Link>
             </div>
-
-
           </Form>
           <div>
             {
